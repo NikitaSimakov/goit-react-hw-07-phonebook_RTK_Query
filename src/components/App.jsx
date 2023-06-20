@@ -4,8 +4,11 @@ import ContactList from './ContactList/ContactList';
 import { fetchContacts } from 'redux/thunks';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { useGetContactsQuery } from 'redux/contactsApi';
 
 const App = () => {
+  const { data } = useGetContactsQuery();
+  console.log(data);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchContacts());
