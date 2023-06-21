@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import css from './ContactForm.module.css';
-import { useAddContactMutation } from 'redux/contactsApi';
+import { useAddContactMutation, useGetContactsQuery } from 'redux/contactsApi';
+import { Notify } from 'notiflix';
 
 const ContactForm = () => {
-  // const dispatch = useDispatch();
+  const { data } = useGetContactsQuery();
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const [addContactQuery] = useAddContactMutation();
@@ -16,6 +17,12 @@ const ContactForm = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
+    if (
+      data.some(contact => contact.name.toLowerCase() === name.toLowerCase())
+    ) {
+      Notify.failure('Ooops! This contact is already in phonebook!');
+      return;
+    }
     addContactQuery({ name, number });
     resetForm();
   };
