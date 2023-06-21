@@ -1,17 +1,8 @@
 import ContactForm from './ContactForm/ContactForm';
 import Filter from './Filter/Filter';
 import ContactList from './ContactList/ContactList';
-// import { fetchContacts } from 'redux/thunks';
-// import { useEffect } from 'react';
-// import { useDispatch } from 'react-redux';
-// import { useGetContactsQuery } from 'redux/contactsApi';
 
 const App = () => {
-  // const { data } = useGetContactsQuery();
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(fetchContacts());
-  // }, [dispatch]);
   return (
     <div
       style={{
