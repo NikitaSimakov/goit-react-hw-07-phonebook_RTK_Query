@@ -1,11 +1,14 @@
-import { deleteContact } from 'redux/thunks';
+// import { deleteContact } from 'redux/thunks';
 import css from './ContactList.module.css';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectFilter } from 'redux/selectors';
-import { useGetContactsQuery } from 'redux/contactsApi';
+import {
+  useDeleteContactMutation,
+  useGetContactsQuery,
+} from 'redux/contactsApi';
 
 const ContactList = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const filter = useSelector(selectFilter);
   // const filteredContacts = useSelector(selectFilteredContact);
@@ -13,10 +16,11 @@ const ContactList = () => {
   const filteredContacts = data?.filter(contact =>
     contact.name.includes(filter)
   );
-  const deleteContactHandler = event => {
-    const { id } = event.currentTarget;
-    dispatch(deleteContact(id));
-  };
+  // const deleteContactHandler = event => {
+  //   const { id } = event.currentTarget;
+  //   dispatch(deleteContact(id));
+  // };
+  const [deleteContactQuery] = useDeleteContactMutation();
 
   return (
     <ul>
@@ -28,7 +32,7 @@ const ContactList = () => {
               className={css.contactList_button}
               type="button"
               id={contact.id}
-              onClick={deleteContactHandler}
+              onClick={() => deleteContactQuery(contact.id)}
             >
               Delete
             </button>
