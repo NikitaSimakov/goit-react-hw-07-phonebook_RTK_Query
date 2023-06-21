@@ -1,13 +1,15 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { addContact } from 'redux/thunks';
+// import { useDispatch } from 'react-redux';
+// import { addContact } from 'redux/thunks';
 import css from './ContactForm.module.css';
+import { useAddContactMutation } from 'redux/contactsApi';
 
 const ContactForm = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
+  const [addContactQuery] = useAddContactMutation();
   const handleInputChange = event => {
     const { name, value } = event.currentTarget;
     if (name === 'name') setName(value);
@@ -16,14 +18,16 @@ const ContactForm = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    dispatch(addContact({ name, number }));
-    reset();
+    // addContactQuery({ name, number });
+    // dispatch(addContact({ name, number }));
+    // reset();
   };
+  console.log({ name, number });
 
-  const reset = () => {
-    setName('');
-    setNumber('');
-  };
+  // const reset = () => {
+  //   setName('');
+  //   setNumber('');
+  // };
 
   return (
     <form className={css.form} onSubmit={handleSubmit}>
@@ -55,7 +59,11 @@ const ContactForm = () => {
           onChange={handleInputChange}
         />
       </label>
-      <button className={css.form_button} type="submit">
+      <button
+        onClick={() => addContactQuery({ name, number })}
+        className={css.form_button}
+        type="submit"
+      >
         Add contact
       </button>
     </form>

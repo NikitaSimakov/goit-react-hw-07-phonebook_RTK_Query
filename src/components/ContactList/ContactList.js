@@ -13,9 +13,9 @@ const ContactList = () => {
   const filter = useSelector(selectFilter);
   // const filteredContacts = useSelector(selectFilteredContact);
   const { data } = useGetContactsQuery();
-  const filteredContacts = data?.filter(contact =>
-    contact.name.includes(filter)
-  );
+  const filteredContacts = data
+    ?.filter(contact => contact.name.toLowerCase().includes(filter))
+    .sort((a, b) => a.name.localeCompare(b.name));
   // const deleteContactHandler = event => {
   //   const { id } = event.currentTarget;
   //   dispatch(deleteContact(id));
