@@ -1,13 +1,18 @@
 import { deleteContact } from 'redux/thunks';
 import css from './ContactList.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectFilteredContact } from 'redux/selectors';
+import { selectFilter } from 'redux/selectors';
+import { useGetContactsQuery } from 'redux/contactsApi';
 
 const ContactList = () => {
   const dispatch = useDispatch();
 
-  const filteredContacts = useSelector(selectFilteredContact);
-
+  const filter = useSelector(selectFilter);
+  // const filteredContacts = useSelector(selectFilteredContact);
+  const { data } = useGetContactsQuery();
+  const filteredContacts = data?.filter(contact =>
+    contact.name.includes(filter)
+  );
   const deleteContactHandler = event => {
     const { id } = event.currentTarget;
     dispatch(deleteContact(id));
