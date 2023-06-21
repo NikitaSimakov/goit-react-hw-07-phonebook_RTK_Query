@@ -1,16 +1,13 @@
 import { useState } from 'react';
-// import { useDispatch } from 'react-redux';
-// import { addContact } from 'redux/thunks';
 import css from './ContactForm.module.css';
-import { useAddContactMutation, useGetContactsQuery } from 'redux/contactsApi';
+import { useAddContactMutation } from 'redux/contactsApi';
 
 const ContactForm = () => {
   // const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-
-  const { refetch } = useGetContactsQuery();
   const [addContactQuery] = useAddContactMutation();
+
   const handleInputChange = event => {
     const { name, value } = event.currentTarget;
     if (name === 'name') setName(value);
@@ -19,15 +16,9 @@ const ContactForm = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    // addContactQuery({ name, number });
-    // dispatch(addContact({ name, number }));
     addContactQuery({ name, number });
     resetForm();
-    refetch();
   };
-  // const onClick = ({ name, number }) => {
-  //   addContactQuery({ name, number });
-  // };
 
   const resetForm = () => {
     setName('');
