@@ -8,8 +8,6 @@ import {
 } from 'redux/contactsApi';
 
 const ContactList = () => {
-  // const dispatch = useDispatch();
-
   const filter = useSelector(selectFilter);
   // const filteredContacts = useSelector(selectFilteredContact);
   const { data } = useGetContactsQuery();
