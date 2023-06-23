@@ -1,4 +1,3 @@
-// import { deleteContact } from 'redux/thunks';
 import css from './ContactList.module.css';
 import { useSelector } from 'react-redux';
 import { selectFilter } from 'redux/selectors';
